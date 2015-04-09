@@ -2,6 +2,7 @@
 
 // Base classes
 #import "GPUImageContext.h"
+#import "GPUAudioPlayer.h"
 #import "GPUImageOutput.h"
 #import "GPUImageView.h"
 #import "GPUImageVideoCamera.h"

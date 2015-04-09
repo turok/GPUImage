@@ -44,7 +44,7 @@ void GPUAudioQueueOutputCallback ( void *inUserData, AudioQueueRef inAQ, AudioQu
 - (void)checkStatus
 {
     if (_status) {
-        NSLog(@"GPUAudio failed %lu",_status);
+        NSLog(@"GPUAudio failed %d",(int)_status);
     }
 }
 
@@ -101,11 +101,11 @@ void GPUAudioQueueOutputCallback ( void *inUserData, AudioQueueRef inAQ, AudioQu
         }
         if (size > 0) {
             [_cacheData getBytes:buffer->mAudioData range:NSMakeRange(_cacheOffset, size)];
-            buffer->mAudioDataByteSize = size;
+            buffer->mAudioDataByteSize = (UInt32)size;
             _cacheOffset += size;
             AudioQueueEnqueueBuffer(audioQueue, buffer, 0, NULL);
         }else{
-            NSLog(@"No data..... %d",_cacheData.length);
+            NSLog(@"No data..... %lu",(unsigned long)_cacheData.length);
         }
         NSInteger index = [self bufferIndex:buffer];
         if (index >= 0) {
