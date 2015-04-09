@@ -218,7 +218,10 @@
         
         // This might need to be extended to handle movies with more than one audio track
         AVAssetTrack* audioTrack = [audioTracks objectAtIndex:0];
-        readerAudioTrackOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:audioTrack outputSettings:nil];
+//        readerAudioTrackOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:audioTrack outputSettings:nil];
+		NSDictionary *decompressionAudioSettings = @{ AVFormatIDKey : [NSNumber numberWithUnsignedInt:kAudioFormatLinearPCM] };
+		readerAudioTrackOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:audioTrack outputSettings:decompressionAudioSettings];
+		
         readerAudioTrackOutput.alwaysCopiesSampleData = NO;
         [assetReader addOutput:readerAudioTrackOutput];
     }
